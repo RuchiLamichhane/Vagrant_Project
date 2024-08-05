@@ -21,7 +21,14 @@ config.vm.define "chatbot_vm" do |my_vm|
          vb.memory = "1024"    
          vb.cpus = 1   
          vb.name = "chatbot"  
-    end  
+    end
+ 
+config.vm.provision "shell", inline: <<-SHELL
+    yum install -y epel-release
+    yum install -y nginx
+    systemctl start nginx
+    systemctl enable nginx
+  SHELL 
  
   end
 end
